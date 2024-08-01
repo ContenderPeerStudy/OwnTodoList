@@ -5,6 +5,7 @@ export const TodoContext = createContext();
 const TodoProvider = ({ children }) => {
     const [todoList, setTodoList] = useState([
         {
+            id: 1,
             title: "example-1",
             content: "example-content-1",
         },

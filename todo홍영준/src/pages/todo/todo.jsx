@@ -1,39 +1,45 @@
 import styled from "styled-components";
-import TodoProvider from "../../context/todoContext";
+import TodoProvider, { TodoContext } from "../../context/todoContext";
 import TodoCard from "./components/TodoCard";
 import AddTodoModal from "./components/addTodoModal";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 const Todo = () => {
     function addTodo(title, content) {}
+    const { todoList, setTodoList } = useContext(TodoContext);
     const [isOpenAddTodoModal, setIsOpenAddTodoModal] = useState(false);
     return (
         <S.Wrapper>
-            <TodoProvider>
-                {isOpenAddTodoModal ? (
-                    <AddTodoModal
-                        $setIsOpenAddTodoModal={setIsOpenAddTodoModal}
-                    ></AddTodoModal>
-                ) : (
-                    ""
-                )}
-                <S.List>
-                    <S.ListTitle>TODOLIST</S.ListTitle>
+            {isOpenAddTodoModal && (
+                <AddTodoModal
+                    $setIsOpenAddTodoModal={setIsOpenAddTodoModal}
+                ></AddTodoModal>
+            )}
+            <S.List>
+                <S.ListTitle>TODOLIST</S.ListTitle>
 
-                    <S.TodoCardWrapper className="round">
-                        <TodoCard></TodoCard>
-                    </S.TodoCardWrapper>
+                <S.TodoCardWrapper className="round">
+                    {todoList.map((el, index) => {
+                        return (
+                            <TodoCard
+                                $id={el.id}
+                                $key={el.id}
+                                $title={el.title}
+                                $content={el.content}
+                            ></TodoCard>
+                        );
+                    })}
+                </S.TodoCardWrapper>
 
-                    <S.AddButton
-                        onClick={() => {
-                            addTodo();
-                            setIsOpenAddTodoModal(true);
-                        }}
-                    >
-                        추가
-                    </S.AddButton>
-                </S.List>
-            </TodoProvider>
+                <S.AddButton
+                    onClick={() => {
+                        addTodo();
+                        setIsOpenAddTodoModal(true);
+                    }}
+                >
+                    추가
+                </S.AddButton>
+            </S.List>
         </S.Wrapper>
     );
 };

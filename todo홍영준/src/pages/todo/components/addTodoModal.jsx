@@ -6,9 +6,10 @@ const AddTodoModal = ({ $setIsOpenAddTodoModal }) => {
     const { todoList, setTodoList } = useContext(TodoContext);
     const onPressAddBtn = (e) => {
         e.preventDefault();
+        const id = Math.floor(Math.random() * 1000000);
         const title = e.target.title.value;
         const content = e.target.content.value;
-        setTodoList([...todoList, { title, content }]);
+        setTodoList([...todoList, { id, title, content }]);
         $setIsOpenAddTodoModal(false);
     };
 
