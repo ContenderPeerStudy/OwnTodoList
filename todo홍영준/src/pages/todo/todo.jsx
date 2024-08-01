@@ -1,10 +1,22 @@
 import styled from "styled-components";
 import TodoProvider from "../../context/todoContext";
 import TodoCard from "./components/TodoCard";
+import AddTodoModal from "./components/addTodoModal";
+import { useState } from "react";
+
 const Todo = () => {
+    function addTodo(title, content) {}
+    const [isOpenAddTodoModal, setIsOpenAddTodoModal] = useState(false);
     return (
         <S.Wrapper>
             <TodoProvider>
+                {isOpenAddTodoModal ? (
+                    <AddTodoModal
+                        $setIsOpenAddTodoModal={setIsOpenAddTodoModal}
+                    ></AddTodoModal>
+                ) : (
+                    ""
+                )}
                 <S.List>
                     <S.ListTitle>TODOLIST</S.ListTitle>
 
@@ -12,7 +24,14 @@ const Todo = () => {
                         <TodoCard></TodoCard>
                     </S.TodoCardWrapper>
 
-                    <S.AddButton>추가</S.AddButton>
+                    <S.AddButton
+                        onClick={() => {
+                            addTodo();
+                            setIsOpenAddTodoModal(true);
+                        }}
+                    >
+                        추가
+                    </S.AddButton>
                 </S.List>
             </TodoProvider>
         </S.Wrapper>
@@ -48,6 +67,7 @@ const TodoCardWrapper = styled.div`
     font-size: 20px;
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     border: 1px solid;
     border-radius: 5px;
