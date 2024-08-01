@@ -37,7 +37,7 @@ const Main = () => {
                 {selectState === "SignIn" ? (
                     <SignIn></SignIn>
                 ) : (
-                    <SignUp></SignUp>
+                    <SignUp $setSelectState={setSelectState}></SignUp>
                 )}
             </S.TabContainer>
         </S.Wrapper>
@@ -74,7 +74,7 @@ const Tab = styled.div`
     font-weight: bold;
     ${(p) => p.isSelected && "background-color: #e0e0e0;"}
     &:hover {
-        background-color: #e0e0e0;
+        background-color: #fef3e2;
     }
 `;
 
