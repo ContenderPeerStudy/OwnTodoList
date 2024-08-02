@@ -2,7 +2,7 @@ const AddTodo = ({ todos, setTodos }) => {
   const onSubmitTodos = (event) => {
     event.preventDefault();
     const newTodos = {
-      id: Math.floor(Math.random * 10000),
+      id: Math.floor(Math.random() * 10000),
       title: event.target.title.value,
       content: event.target.content.value,
     };
