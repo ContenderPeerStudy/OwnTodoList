@@ -22,9 +22,9 @@ const SignUpForm = ({ setFormState }) => {
   };
   return (
     <form onSubmit={onSubmitSingUp}>
-      {SingFormArray.map((form) => {
-        <input key={form.name} label={form.label} name={form.name} />;
-      })}
+      {SingFormArray.map((form) => (
+        <input key={form.name} label={form.label} name={form.name} />
+      ))}
       <button>회원가입</button>
     </form>
   );
