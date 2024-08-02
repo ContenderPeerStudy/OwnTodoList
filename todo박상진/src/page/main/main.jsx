@@ -20,15 +20,15 @@ const Main = () => {
 
   return (
     <div>
-      {tabArray.map((tab, index) => {
+      {tabArray.map((tab, index) => (
         <tab
           key={index}
           $isSelected={formState === tab.name}
           onClick={onClickTab}
         >
           {tab.name}
-        </tab>;
-      })}
+        </tab>
+      ))}
       {formState === "sign-in" ? (
         <SignInForm />
       ) : (
