@@ -5,7 +5,7 @@ const SingFormArray = [
   },
   {
     label: "비밀번호",
-    name: "email",
+    name: "password",
   },
   {
     label: "비밀번호확인",
@@ -23,7 +23,12 @@ const SignUpForm = ({ setFormState }) => {
   return (
     <form onSubmit={onSubmitSingUp}>
       {SingFormArray.map((form) => (
-        <input key={form.name} label={form.label} name={form.name} />
+        <input
+          key={form.name}
+          label={form.label}
+          placeholder={form.label}
+          name={form.name}
+        />
       ))}
       <button>회원가입</button>
     </form>

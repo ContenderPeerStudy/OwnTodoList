@@ -21,11 +21,7 @@ const Main = () => {
   return (
     <div>
       {tabArray.map((tab, index) => (
-        <tab
-          key={index}
-          $isSelected={formState === tab.name}
-          onClick={onClickTab}
-        >
+        <tab key={index} onClick={() => onClickTab(tab.name)}>
           {tab.name}
         </tab>
       ))}
