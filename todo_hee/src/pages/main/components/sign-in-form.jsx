@@ -7,7 +7,7 @@ const SignInForm = () => {
     const handlePressSignIn = (event) => {
         event.preventDefault();
 
-        const { email, password } = event.target.elements;
+        const { email, password } = event.target.elements; 
         if (!email.value.trim() || !password.value.trim()) return;
         if (email.value === "test" && password.value === "test") {
             return navigate("/todo");
@@ -17,15 +17,17 @@ const SignInForm = () => {
 
     return (
         <form onSubmit={handlePressSignIn}>
-            <div>
-                <label htmlFor="email">이메일</label>
-                <input type="text" id="email" name="email" placeholder="email" />
-            </div>
-            <div>
-                <label htmlFor="password">비밀번호</label>
-                <input type="password" id="password" name="password" placeholder="password" />
-            </div>
-            <button type="submit"> 로그인 </button>
+            <label>
+                이메일
+                <input type="email" name="email" placeholder="email" />
+            </label>
+            <label>
+                비밀번호
+                <input type="password" name="password" placeholder="password" />
+            </label>
+            <button type="submit">
+                로그인
+            </button>
         </form>
     );
 };
