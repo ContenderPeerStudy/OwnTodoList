@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SignInForm from './components/sign-in-form';
 import SignUpForm from './components/sign-up-form';
+import styled from "styled-components";
 
 const Main = () => {
     const [formState, setFormState] = useState("SIGN-IN");
@@ -16,28 +17,74 @@ const Main = () => {
 
     const handlePressSignTab = (tabName) => {
         setFormState(tabName);
-        console.log(formState);
+        console.log(tabName); 
     };
 
     return (
-        <div>
-            {tabArray.map((tab, index) => (
-                <button
-                    key={index}
-                    className={formState === tab.name ? 'selected-tab' : ''}
-                    onClick={() => handlePressSignTab(tab.name)}
-                >
-                    {tab.name}
-                </button>
-            ))}
-
-            {formState === "SIGN-IN" ? (
-                <SignInForm />
-            ) : (
-                <SignUpForm setFormState={setFormState} />
-            )}
-        </div>
+        <S.Wrapper>
+            <S.Container>
+                <S.Header>
+                    {tabArray.map((tab, index) => (
+                        <S.Tab
+                            key={index}
+                            $isSelected={formState === tab.name}
+                            onClick={() => handlePressSignTab(tab.name)}
+                        >
+                            {tab.name}
+                        </S.Tab>
+                    ))}
+                </S.Header>
+                {formState === "SIGN-IN" ? (
+                    <SignInForm />
+                ) : (
+                    <SignUpForm setFormState={setFormState} />
+                )}
+            </S.Container>
+        </S.Wrapper>
     );
 };
 
 export default Main;
+
+const Wrapper = styled.div`
+  height: calc(100vh - 140px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Container = styled.div`
+  width: 360px;
+  border: 1px solid #999;
+`;
+
+const Header = styled.header`
+  background-color: #00c7ae;
+  display: flex;
+`;
+
+const Tab = styled.div`
+  width: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${(props) => props.$isSelected && "background-color: #e0e0e0;"}
+
+  font-size: 32px;
+  padding: 16px;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+`;
+
+const S = {
+  Wrapper,
+  Container,
+  Header,
+  Tab,
+};

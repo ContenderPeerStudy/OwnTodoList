@@ -1,50 +1,38 @@
-const SIGNFORM_ARRAY = [
-    {
-      label: "이메일",
-      name: "email",
-      option: {
-        placeholder: "이메일을 입력해주세요",
-      },
-    },
-    {
-      label: "비밀번호",
-      name: "password",
-      option: {
-        placeholder: "비밀번호를 입력해주세요",
-      },
-    },
-    {
-      label: "비밀번호 확인",
-      name: "password-confirm",
-      option: {
-        placeholder: "비밀번호를 다시 한 번 확인해주세요",
-      },
-    },
-  ];
+import React from 'react';
 
-  const SignUpForm = ({ setFormState }) => {
-    const onSubmitSignUp = (event) => {
-      event.preventDefault();
-      const email = event.target.email.value;
-      alert(`${email}님 환영합니다`);
-      setFormState("SIGN-IN");
+const SignUpForm = ({ setFormState }) => {
+    const handlePressSignUp = (event) => {
+        event.preventDefault();
+
+        const { email, password, confirmPassword } = event.target.elements; // Updated to use event.target.elements
+        if (!email.value.trim() || !password.value.trim() || !confirmPassword.value.trim()) return;
+        if (password.value !== confirmPassword.value) {
+            alert("비밀번호가 일치하지 않습니다.");
+            return;
+        }
+
+        setFormState("SIGN-IN"); 
     };
-  
-    return (
-      <form onSubmit={onSubmitSignUp}>
-        {SIGNFORM_ARRAY.map((form) => (
-          <forminput
-            key={form.name}
-            label={form.label}
-            name={form.name}
-            placeholder={form.option?.placeholder}
-          />
-        ))}
-        <button>
-          회원가입
-        </button>
-      </form>
-    );
-  };
 
-  export default SignUpForm;
+    return (
+        <form onSubmit={handlePressSignUp}>
+            <label>
+                이메일
+                <input type="email" name="email" placeholder="email" />
+            </label>
+            <label>
+                비밀번호
+                <input type="password" name="password" placeholder="password" />
+            </label>
+            <label>
+                비밀번호 확인
+                <input type="password" name="confirmPassword" placeholder="confirm password" />
+            </label>
+            <button type="submit">
+                회원가입
+            </button>
+        </form>
+    );
+};
+
+export default SignUpForm;
