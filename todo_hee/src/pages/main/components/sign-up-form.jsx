@@ -4,7 +4,7 @@ const SignUpForm = ({ setFormState }) => {
     const handlePressSignUp = (event) => {
         event.preventDefault();
 
-        const { email, password, confirmPassword } = event.target.elements; // Updated to use event.target.elements
+        const { email, password, confirmPassword } = event.target.elements; 
         if (!email.value.trim() || !password.value.trim() || !confirmPassword.value.trim()) return;
         if (password.value !== confirmPassword.value) {
             alert("비밀번호가 일치하지 않습니다.");
