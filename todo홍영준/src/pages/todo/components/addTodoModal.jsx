@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { TodoContext } from "../../../context/todoContext";
+import { TodoContext, useTodo } from "../../../context/todoContext";
 
 const AddTodoModal = ({ $setIsOpenAddTodoModal }) => {
     const { todoList, setTodoList } = useContext(TodoContext);
@@ -9,7 +9,9 @@ const AddTodoModal = ({ $setIsOpenAddTodoModal }) => {
         const id = Math.floor(Math.random() * 1000000);
         const title = e.target.title.value;
         const content = e.target.content.value;
-        setTodoList([...todoList, { id, title, content }]);
+        const token = JSON.parse(localStorage.getItem("access_token")).token;
+        useTodo.addTodo({ id, title, content, token });
+        // setTodoList([...todoList, { id, title, content }]);
         $setIsOpenAddTodoModal(false);
     };
 
