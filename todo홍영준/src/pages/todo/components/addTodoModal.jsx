@@ -41,11 +41,11 @@ const AddTodoModal = ({ $setIsOpenAddTodoModal }) => {
     );
 };
 const ModalScreen = styled.div`
-    height: 100vh;
+    height: 300px;
     width: 100vw;
-    top: 0;
+
     position: fixed;
-    z-index: 1000;
+    z-index: 100;
     background-color: rgba(0, 0, 0, 0.5);
 `;
 const AddTodoForm = styled.form`
@@ -54,7 +54,7 @@ const AddTodoForm = styled.form`
     height: 30%;
     position: absolute;
     left: 50%;
-    top: 10%;
+    top: 50%;
     transform: translateX(-50%);
 `;
 const CloseButton = styled.button`

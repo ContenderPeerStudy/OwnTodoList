@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 
 const Main = () => {
-    const [selectState, setSelectState] = useState("SignIn");
+    const [selectState, setSelectState] = useState();
+    console.log(selectState);
+    useEffect(() => {
+        setSelectState("SignIn");
+    }, []);
     const handleSelection = (tabName) => {
         console.log(`선택된 탭: ${tabName}`);
         setSelectState(tabName);
@@ -26,7 +30,7 @@ const Main = () => {
                         return (
                             <S.Tab
                                 key={index}
-                                isSelected={selectState === tab.tabName}
+                                $isSelected={selectState === tab.tabName}
                                 onClick={() => handleSelection(tab.tabName)}
                             >
                                 {tab.tabName}
@@ -37,7 +41,10 @@ const Main = () => {
                 {selectState === "SignIn" ? (
                     <SignIn></SignIn>
                 ) : (
-                    <SignUp $setSelectState={setSelectState}></SignUp>
+                    <SignUp
+                        $selectState={selectState}
+                        $setSelectState={setSelectState}
+                    ></SignUp>
                 )}
             </S.TabContainer>
         </S.Wrapper>
@@ -72,7 +79,7 @@ const Tab = styled.div`
     font-size: 32px;
     padding: 16px;
     font-weight: bold;
-    ${(p) => p.isSelected && "background-color: #e0e0e0;"}
+    ${(p) => p.$isSelected && "background-color: #e0e0e0;"}
     &:hover {
         background-color: #fef3e2;
     }
